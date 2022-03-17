@@ -1,4 +1,4 @@
-module myGin
+module goaway
 
 go 1.17
 

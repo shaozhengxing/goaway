@@ -2,12 +2,11 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"myGin/controller"
+	"goaway/controller"
+	"goaway/kernel"
 )
 
-func Load(r *gin.Engine) {
-	router := newRouter(r)
-
+func config(router group) {
 	router.Group("/api", func(api group) {
 		api.Group("/user", func(user group) {
 			user.Registered(GET, "/info", controller.Index)
@@ -15,4 +14,12 @@ func Load(r *gin.Engine) {
 			user.Registered(GET, "/money", controller.Index)
 		})
 	})
+}
+
+func Load(r *gin.Engine) {
+	router := newRouter(r)
+
+	router.Group("", func(g group) {
+		config(g)
+	}, kernel.Middleware...) // 加载全局中间件
 }
