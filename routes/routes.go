@@ -3,17 +3,19 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"goaway/controller"
-	"goaway/kernel"
+	"goaway/middleware/kernel"
 )
 
 func config(router group) {
-	router.Group("/api", func(api group) {
-		api.Group("/user", func(user group) {
-			user.Registered(GET, "/info", controller.Index)
-			user.Registered(GET, "/order", controller.Index)
-			user.Registered(GET, "/money", controller.Index)
-		})
-	})
+	//router.Group("/api", func(api group) {
+	//	api.Group("/user", func(user group) {
+	//		user.Registered(GET, "/info", controller.Index)
+	//		user.Registered(GET, "/order", controller.Index)
+	//		user.Registered(GET, "/money", controller.Index)
+	//	})
+	//})
+
+	router.Registered(GET, "/", controller.Index)
 }
 
 func Load(r *gin.Engine) {
