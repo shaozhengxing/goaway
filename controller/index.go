@@ -2,6 +2,7 @@ package controller
 
 import (
 	"goaway/component/limiter"
+	"goaway/component/lock"
 	"goaway/context"
 	"goaway/response"
 	"golang.org/x/time/rate"
@@ -44,4 +45,22 @@ func Index4(context *context.Context) *response.Response {
 	}
 
 	return response.Resp().String("")
+}
+
+func Test() *response.Response {
+	l := lock.NewLock("test", 10*time.Second)
+
+	defer l.Release()
+
+	//if l.Get() {
+	//	return response.Resp().String("拿锁成功")
+	//}
+	//
+	//return response.Resp().String("拿锁失败")
+
+	if l.Block(5 * time.Second) {
+		return response.Resp().String("拿锁成功")
+	}
+
+	return response.Resp().String("拿锁失败")
 }
