@@ -49,6 +49,7 @@ func (s *Session) Set(key string, value interface{}) error {
 	// 加锁，防止读取并行
 	s.Lock.Lock()
 
+	// defer是在函数退出后，执行语句
 	defer s.Lock.Unlock()
 
 	sessionString, err := redis.Client().Get(context.TODO(), s.Cookie).Result()

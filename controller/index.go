@@ -1,18 +1,25 @@
 package controller
 
 import (
+	"goaway/component/limiter"
 	"goaway/context"
 	"goaway/response"
+	"golang.org/x/time/rate"
 	"strconv"
+	"time"
 )
 
 func Index(context *context.Context) *response.Response {
-	//panic("假装错误")
 	//return response.Resp().Json(gin.H{"msg": "hello world"})
+	//panic("假装错误")
+	//context.Session().Set("msg", "golang 是世界上最好的语言")
 
-	context.Session().Set("msg", "golang 是世界上最好的语言")
+	l := limiter.NewLimiter(rate.Every(1*time.Second), 5, context.ClientIP())
+	if !l.Allow() {
+		return response.Resp().String("您的访问过于频繁")
+	}
 
-	return response.Resp().String(context.Domain())
+	return response.Resp().String(time.Now().String())
 }
 
 func Index2(context *context.Context) *response.Response {

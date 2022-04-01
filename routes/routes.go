@@ -15,10 +15,10 @@ func config(router group) {
 	//	})
 	//})
 
-	//router.Registered(GET, "/", controller.Index)
+	router.Registered(GET, "/", controller.Index)
 	//router.Registered(GET, "/", controller.Index2)
 	//router.Registered(GET, "/", controller.Index3)
-	router.Registered(GET, "/", controller.Index4)
+	//router.Registered(GET, "/", controller.Index4)
 }
 
 func Load(r *gin.Engine) {
