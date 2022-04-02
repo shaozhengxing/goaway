@@ -2,7 +2,7 @@ package kernel
 
 import (
 	"goaway/context"
-	"goaway/exception"
+	"goaway/middleware/exception"
 	"goaway/middleware/session"
 )
 

@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"goaway/controller"
-	"goaway/middleware/kernel"
+	"goaway/kernel"
 )
 
 func config(router group) {

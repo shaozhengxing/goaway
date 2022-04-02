@@ -1,18 +1,25 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"goaway/middleware/kernel"
-	"goaway/routes"
+	"fmt"
+	"goaway/cache"
+	"time"
 )
 
 func main() {
-	r := gin.Default()
+	//r := gin.Default()
+	//
+	//// 加载全局变量
+	//kernel.Load()
+	//
+	//routes.Load(r)
+	//
+	//r.Run()
 
-	// 加载全局变量
-	kernel.Load()
+	c := cache.Cache("file")
 
-	routes.Load(r)
+	c.Put("peter", "nice", 1*time.Minute)
 
-	r.Run()
+	value, _ := c.Get("peter")
+	fmt.Println(value)
 }
